@@ -62,7 +62,12 @@ if (isset($_POST['sign'])) {
 
             <form action=" " method="post">
 
-                <p class="logo" style="">Food <b style="color:#06C167; ">Donate</b></p>
+              <div style="display: flex; justify-content: center; align-items: center;">
+    <a href="home.html" style="display: inline-block;">
+        <img src="img/ZeroWaste.png" alt="Zero Waste Logo" style="width: 300px; height: auto; cursor: pointer;" />
+    </a>
+</div>
+
                 <p id="heading" style="padding-left: 1px;"> Welcome back ! <img src="" alt=""> </p>
 
                 <div class="input">

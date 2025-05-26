@@ -1,7 +1,6 @@
 
 <?php
-// $connection = mysqli_connect("localhost:3307", "root", "");
-// $db = mysqli_select_db($connection, 'demo');
+
 include '../connection.php';
  include("connect.php"); 
 if($_SESSION['name']==''){
@@ -26,8 +25,8 @@ if($_SESSION['name']==''){
     <title>Admin Dashboard Panel</title> 
     
 <?php
- $connection=mysqli_connect("localhost:3307","root","");
- $db=mysqli_select_db($connection,'demo');
+ $connection=mysqli_connect("localhost","root","");
+ $db=mysqli_select_db($connection,'zerowaste');
  
 
 
@@ -49,10 +48,7 @@ if($_SESSION['name']==''){
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dahsboard</span>
                 </a></li>
-                <!-- <li><a href="#">
-                    <i class="uil uil-files-landscapes"></i>
-                    <span class="link-name">Content</span>
-                </a></li> -->
+              
                 <li><a href="analytics.php">
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Analytics</span>
@@ -65,14 +61,7 @@ if($_SESSION['name']==''){
                     <i class="uil uil-comments"></i>
                     <span class="link-name">Feedbacks</span>
                 </a></li>
-                <li><a href="adminprofile.php">
-                    <i class="uil uil-user"></i>
-                    <span class="link-name">Profile</span>
-                </a></li>
-                <!-- <li><a href="#">
-                    <i class="uil uil-share"></i>
-                    <span class="link-name">Share</span>
-                </a></li> -->
+    
             </ul>
             
             <ul class="logout-mode">
@@ -113,44 +102,76 @@ if($_SESSION['name']==''){
        <br>
        <br>
 
-            <div class="activity">
-              
-                <div class="table-container">
-         
-         <div class="table-wrapper">
-        <table class="table">
-        <thead>
-        <tr>
-            <th>name</th>
-            <th>email</th>
-            <th>message</th>
-           
-          
-           
-        </tr>
-        </thead>
-       <tbody>
-   
-         <?php
-    
-        $query="select * from user_feedback ";
-        $result=mysqli_query($connection, $query);
-        if($result==true){
-            while($row=mysqli_fetch_assoc($result)){
-                echo "<tr><td data-label=\"name\">".$row['name']."</td><td data-label=\"email\">".$row['email']."</td><td data-label=\"message\">".$row['message']."</td></tr>";
+          <div class="activity">
+    <div class="table-container" style="overflow-x:auto; margin-top: 20px;">
+        <table class="table" aria-label="User Feedbacks Table" style="
+            width: 100%;
+            border-collapse: separate; 
+            border-spacing: 0 10px; /* vertical spacing between rows */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            background-color: #fff;
+        ">
+            <thead style="background-color: #06C167; color: white;">
+                <tr>
+                    <th style="padding: 15px 20px; text-align: center; border-right: 2px solid #fff;">Name</th>
+                    <th style="padding: 15px 20px; text-align: center; border-right: 2px solid #fff;">Email</th>
+                    <th style="padding: 15px 20px; text-align: center;">Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $query = "SELECT * FROM user_feedback";
+                $result = mysqli_query($connection, $query);
+                if ($result) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr style='background: #f9f9f9; border: 1px solid #ddd; border-radius: 8px;'>";
+                        echo "<td style='padding: 15px 20px; border-right: 1px solid #ddd;'>" . htmlspecialchars($row['name']) . "</td>";
+                        echo "<td style='padding: 15px 20px; border-right: 1px solid #ddd;'>" . htmlspecialchars($row['email']) . "</td>";
+                        echo "<td style='padding: 15px 20px;'>" . htmlspecialchars($row['message']) . "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='3' style='padding: 15px; text-align:center;'>No feedback found.</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-             }
-          }
-       ?> 
-    
-        </tbody>
-    </table>
-         </div>
-                </div>
-                
-         
-            
-        </div>
+<script>
+    // Hover effect with subtle shadow and background color
+    document.querySelectorAll('table.table tbody tr').forEach(row => {
+        row.addEventListener('mouseenter', () => {
+            row.style.backgroundColor = '#e6f4ea';
+            row.style.boxShadow = '0 2px 10px rgba(6,193,103,0.3)';
+        });
+        row.addEventListener('mouseleave', () => {
+            row.style.backgroundColor = '#f9f9f9';
+            row.style.boxShadow = 'none';
+        });
+    });
+</script>
+
+</div>
+
+<script>
+    // Hover effect with subtle shadow and background color
+    document.querySelectorAll('table.table tbody tr').forEach(row => {
+        row.addEventListener('mouseenter', () => {
+            row.style.backgroundColor = '#e6f4ea';
+            row.style.boxShadow = '0 2px 10px rgba(6,193,103,0.3)';
+        });
+        row.addEventListener('mouseleave', () => {
+            row.style.backgroundColor = '#f9f9f9';
+            row.style.boxShadow = 'none';
+        });
+    });
+</script>
+
     </section>
 
     <script src="admin.js"></script>

@@ -1,45 +1,108 @@
-
 <?php
-// $connection = mysqli_connect("localhost:3307", "root", "");
-// $db = mysqli_select_db($connection, 'demo');
 include "../connection.php";
-include("connect.php"); 
-if($_SESSION['name']==''){
-	header("location:signin.php");
+include("connect.php");
+if ($_SESSION['name'] == '') {
+    header("location:signin.php");
 }
 ?>
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-    <!----======== CSS ======== -->
+    <title>Admin Dashboard Panel</title>
+
     <link rel="stylesheet" href="admin.css">
-     
-    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-    <title>Admin Dashboard Panel</title> 
-    
-<?php
- $connection=mysqli_connect("localhost:3307","root","");
- $db=mysqli_select_db($connection,'demo');
- 
+    <style>
+        .location-wrapper {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
 
+        .location {
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
+        }
 
-?>
+        .location form {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .location select, .location input[type="submit"] {
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .location input[type="submit"] {
+            background-color: #47a118;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .location input[type="submit"]:hover {
+            background-color: #3d8f15;
+        }
+
+        .table-container {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f1f1f1;
+        }
+
+        .no-results {
+            margin-top: 20px;
+            background-color: #ffecec;
+            padding: 20px;
+            border: 1px solid #ffcccc;
+            border-radius: 10px;
+            color: #c00;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
     <nav>
         <div class="logo-name">
-            <div class="logo-image">
-                <!--<img src="images/logo.png" alt="">-->
-            </div>
-
+            <div class="logo-image"></div>
             <span class="logo_name">ADMIN</span>
         </div>
 
@@ -47,12 +110,8 @@ if($_SESSION['name']==''){
             <ul class="nav-links">
                 <li><a href="admin.php">
                     <i class="uil uil-estate"></i>
-                    <span class="link-name">Dahsboard</span>
+                    <span class="link-name">Dashboard</span>
                 </a></li>
-                <!-- <li><a href="#">
-                    <i class="uil uil-files-landscapes"></i>
-                    <span class="link-name">Content</span>
-                </a></li> -->
                 <li><a href="analytics.php">
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Analytics</span>
@@ -65,122 +124,88 @@ if($_SESSION['name']==''){
                     <i class="uil uil-comments"></i>
                     <span class="link-name">Feedbacks</span>
                 </a></li>
-                <li><a href="adminprofile.php">
-                    <i class="uil uil-user"></i>
-                    <span class="link-name">Profile</span>
-                </a></li>
-                <!-- <li><a href="#">
-                    <i class="uil uil-share"></i>
-                    <span class="link-name">Share</span>
-                </a></li> -->
             </ul>
-            
+
             <ul class="logout-mode">
                 <li><a href="../logout.php">
                     <i class="uil uil-signout"></i>
                     <span class="link-name">Logout</span>
                 </a></li>
-
                 <li class="mode">
-                    <a href="#">
-                        <i class="uil uil-moon"></i>
-                    <span class="link-name">Dark Mode</span>
-                </a>
-
-                <div class="mode-toggle">
-                  <span class="switch"></span>
-                </div>
-            </li>
+                    <a href="#"><i class="uil uil-moon"></i>
+                    <span class="link-name">Dark Mode</span></a>
+                    <div class="mode-toggle"><span class="switch"></span></div>
+                </li>
             </ul>
         </div>
     </nav>
 
     <section class="dashboard">
-        
         <div class="top">
             <i class="uil uil-bars sidebar-toggle"></i>
-            <!-- <p>Food Donate</p> -->
-            <p  class ="logo" >Food <b style="color: #06C167; ">Donate</b></p>
-             <p class="user"></p>
-            <!-- <div class="search-box">
-                <i class="uil uil-search"></i>
-                <input type="text" placeholder="Search here...">
-            </div> -->
-            
-            <!--<img src="images/profile.jpg" alt="">-->
+            <p class="logo" style="color: #47a118; font-weight: bold; font-size: 32px;">ZeroWaste</p>
+            <p class="user"></p>
         </div>
-        <br>
-        <br>
-        <br>
-    
-  
 
-            <div class="activity">
-               
+        <br><br><br>
+
+        <div class="location-wrapper">
             <div class="location">
-                <!-- <p class="logo">Filter by Location</p> -->
-          <form method="post">
-             <label for="location" class="logo">Select Location:</label>
-             <!-- <br> -->
-            <select id="location" name="location">
-               <option value="chennai">chennai</option>
-               <option value="madurai">madurai</option>
-               <option value="coimbatore">coimbatore</option>
-        
-            </select>
-                <input type="submit" value="Get Details">
-         </form>
-         <br>
+                <form method="post">
+                    <label for="location" class="logo">Select Location:</label>
+                    <select id="location" name="location">
+                        <option value="" selected disabled>Select One</option>
+                        <option value="dhanmondi">Dhanmondi</option>
+                        <option value="uttara">Uttara</option>
+                        <option value="mirpur">Mirpur</option>
+                        <option value="gulshan">Gulshan</option>
+                        <option value="banani">Banani</option>
+                    </select>
+                    <input type="submit" value="Get Details">
+                </form>
 
-         <?php
-    // Get the selected location from the form
-    if(isset($_POST['location'])) {
-      $location = $_POST['location'];
-      
-      // Query the database for people in the selected location
-      $sql = "SELECT * FROM food_donations WHERE location='$location'";
-      $result=mysqli_query($connection, $sql);
-    //   $result = $conn->query($sql);
-      
-      // If there are results, display them in a table
-      if ($result->num_rows > 0) {
-        // echo "<h2>Food Donate in $location:</h2>";
-        
-        echo" <div class=\"table-container\">";
-        echo "    <div class=\"table-wrapper\">";
-        echo "  <table class=\"table\">";
-        echo "<table><thead>";
-        echo" <tr>
-        <th >Name</th>
-        <th>food</th>
-        <th>Category</th>
-        <th>phoneno</th>
-        <th>date/time</th>
-        <th>address</th>
-        <th>Quantity</th>
-        
-    </tr>
-    </thead><tbody>";
+                <?php
+                if (isset($_POST['location'])) {
+                    $location = $_POST['location'];
+                    $sql = "SELECT * FROM food_donations WHERE location='$location'";
+                    $result = mysqli_query($connection, $sql);
 
-        while($row = $result->fetch_assoc()) {
-            echo "<tr><td data-label=\"name\">".$row['name']."</td><td data-label=\"food\">".$row['food']."</td><td data-label=\"category\">".$row['category']."</td><td data-label=\"phoneno\">".$row['phoneno']."</td><td data-label=\"date\">".$row['date']."</td><td data-label=\"Address\">".$row['address']."</td><td data-label=\"quantity\">".$row['quantity']."</td></tr>";
+                    echo "<div class='table-container'>";
 
-        //   echo "<tr><td>" . $row["name"] . "</td><td>" . $row["phoneno"] . "</td><td>" . $row["location"] . "</td></tr>";
-        }
-        echo "</tbody></table></div>";
-      } else {
-        echo "<p>No results found.</p>";
-      }
-      
-   
-    }
-  ?>
- </div>
+                    if ($result->num_rows > 0) {
+                        echo "<div class='table-wrapper'>";
+                        echo "<table class='table'><thead><tr>
+                            <th>Name</th>
+                            <th>Food</th>
+                            <th>Category</th>
+                            <th>Phone No</th>
+                            <th>Date/Time</th>
+                            <th>Address</th>
+                            <th>Quantity</th>
+                        </tr></thead><tbody>";
 
- 
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>
+                                <td>{$row['name']}</td>
+                                <td>{$row['food']}</td>
+                                <td>{$row['category']}</td>
+                                <td>{$row['phoneno']}</td>
+                                <td>{$row['date']}</td>
+                                <td>{$row['address']}</td>
+                                <td>{$row['quantity']}</td>
+                            </tr>";
+                        }
 
-            
+                        echo "</tbody></table></div>";
+                    } else {
+                        echo "<div class='no-results'>No results found for <strong>$location</strong>.</div>";
+                    }
+
+                    echo "</div>";
+                }
+                ?>
             </div>
+        </div>
     </section>
 
     <script src="admin.js"></script>

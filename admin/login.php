@@ -10,7 +10,7 @@ if(isset($_POST['signup']))
     $username=$_POST['name'];
     $email=$_POST['email'];
     $password=$_POST['password'];
-    $location=$_POST['district'];
+    $location=$_POST['location'];
 
     $pass=password_hash($password,PASSWORD_DEFAULT);
     $sql="select * from admin where email='$email'" ;
@@ -136,35 +136,36 @@ if(isset($_POST['signup']))
                     </div>
                     <div class="input-field">
                         <!-- <label for="district">District:</label> -->
-                        <select id="district" name="district" style="padding:10px; padding-left: 20px;">
-                          <option value="chennai">Chennai</option>
-                          <option value="kancheepuram">Kancheepuram</option>
-                          <option value="thiruvallur">Thiruvallur</option>
-                          <option value="vellore">Vellore</option>
-                          <option value="tiruvannamalai">Tiruvannamalai</option>
-                          <option value="tiruvallur">Tiruvallur</option>
-                          <option value="tiruppur">Tiruppur</option>
-                          <option value="coimbatore">Coimbatore</option>
-                          <option value="erode">Erode</option>
-                          <option value="salem">Salem</option>
-                          <option value="namakkal">Namakkal</option>
-                          <option value="tiruchirappalli">Tiruchirappalli</option>
-                          <option value="thanjavur">Thanjavur</option>
-                          <option value="pudukkottai">Pudukkottai</option>
-                          <option value="karur">Karur</option>
-                          <option value="ariyalur">Ariyalur</option>
-                          <option value="perambalur">Perambalur</option>
-                          <option value="madurai" selected>Madurai</option>
-                          <option value="virudhunagar">Virudhunagar</option>
-                          <option value="dindigul">Dindigul</option>
-                          <option value="ramanathapuram">Ramanathapuram</option>
-                          <option value="sivaganga">Sivaganga</option>
-                          <option value="thoothukkudi">Thoothukkudi</option>
-                          <option value="tirunelveli">Tirunelveli</option>
-                          <option value="tiruppur">Tiruppur</option>
-                          <option value="tenkasi">Tenkasi</option>
-                          <option value="kanniyakumari">Kanniyakumari</option>
-                        </select> 
+                        <select id="location" name="location" style="padding:10px;">
+                            <option value="" selected disabled>Select One</option>
+                            <option value="dhanmondi">Dhanmondi</option>
+                            <option value="uttara">Uttara</option>
+                            <option value="mirpur">Mirpur</option>
+                            <option value="gulshan">Gulshan</option>
+                            <option value="banani">Banani</option>
+                            <option value="badda">Badda</option>
+                            <option value="tejgaon">Tejgaon</option>
+                            <option value="mohammadpur">Mohammadpur</option>
+                            <option value="motijheel">Motijheel</option>
+                            <option value="shahbagh">Shahbagh</option>
+                            <option value="farmgate">Farmgate</option>
+                            <option value="ramna">Ramna</option>
+                            <option value="wazirpur">Wazirpur</option>
+                            <option value="azimpur">Azimpur</option>
+                            <option value="jatrabari">Jatrabari</option>
+                            <option value="shyamoli">Shyamoli</option>
+                            <option value="rampura">Rampura</option>
+                            <option value="malibagh">Malibagh</option>
+                            <option value="khilgaon">Khilgaon</option>
+                            <option value="khilkhet">Khilkhet</option>
+                            <option value="mugda">Mugda</option>
+                            <option value="turag">Turag</option>
+                            <option value="demra">Demra</option>
+                            <option value="keraniganj">Keraniganj</option>
+                            <option value="bimanbandar">Bimanbandar (Airport)</option>
+                            </select>
+
+
                         
 
                         <!-- <input type="password" class="password" placeholder="Create a password" required> -->

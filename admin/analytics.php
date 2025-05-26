@@ -1,8 +1,7 @@
 
 <?php
 ob_start(); 
-// $connection = mysqli_connect("localhost:3307", "root", "");
-// $db = mysqli_select_db($connection, 'demo');
+
  include("connect.php"); 
 if($_SESSION['name']==''){
 	header("location:signin.php");
@@ -29,8 +28,8 @@ if($_SESSION['name']==''){
     <title>Admin Dashboard Panel</title> 
     
 <?php
- $connection=mysqli_connect("localhost:3307","root","");
- $db=mysqli_select_db($connection,'demo');
+ $connection=mysqli_connect("localhost","root","");
+ $db=mysqli_select_db($connection,'zerowaste');
  
 
 
@@ -68,14 +67,7 @@ if($_SESSION['name']==''){
                     <i class="uil uil-comments"></i>
                     <span class="link-name">Feedbacks</span>
                 </a></li>
-                <li><a href="adminprofile.php">
-                    <i class="uil uil-user"></i>
-                    <span class="link-name">Profile</span>
-                </a></li>
-                <!-- <li><a href="#">
-                    <i class="uil uil-share"></i>
-                    <span class="link-name">Share</span>
-                </a></li> -->
+    
             </ul>
             
             <ul class="logout-mode">
@@ -103,7 +95,7 @@ if($_SESSION['name']==''){
         <div class="top">
             <i class="uil uil-bars sidebar-toggle"></i>
             <!-- <p>Food Donate</p> -->
-            <p  class ="logo" >Food <b style="color: #06C167; ">Donate</b></p>
+           <p class="logo" style="color: #47a118; font-weight: bold; font-size: 32px;">ZeroWaste</p>
              <p class="user"></p>
             <!-- <div class="search-box">
                 <i class="uil uil-search"></i>
@@ -189,7 +181,7 @@ if($_SESSION['name']==''){
 
     ?>
 var xValues = ["Male","Female"];
-var xplace=["Madurai","chennai","coimbatore"];
+var xplace = ["Dhanmondi", "Gulshan", "Banani", "Uttara", "Mirpur"];
 var yplace=[<?php echo json_encode($madurai,JSON_HEX_TAG);?>,<?php echo json_encode($coimbatore,JSON_HEX_TAG);?>,<?php echo json_encode($chennai,JSON_HEX_TAG);?>];
 var yValues = [<?php echo json_encode($male,JSON_HEX_TAG);?>,<?php echo json_encode($female,JSON_HEX_TAG);?>,30];
 var barColors = ["#06C167","blue"];

@@ -11,7 +11,7 @@ if(isset($_POST['sign']))
     $email=$_POST['email'];
     $password=$_POST['password'];
 
-    $location=$_POST['district'];
+    $location=$_POST['location'];
     $address=$_POST['address'];
 
     $pass=password_hash($password,PASSWORD_DEFAULT);
@@ -118,35 +118,15 @@ if(isset($_POST['sign']))
             <div class="input-field">
                         <!-- <label for="district">Location:</label> -->
                         <!-- <br> -->
-                        <select id="district" name="district" style="padding:10px; padding-left: 20px;">
-                          <option value="chennai">Chennai</option>
-                          <option value="kancheepuram">Kancheepuram</option>
-                          <option value="thiruvallur">Thiruvallur</option>
-                          <option value="vellore">Vellore</option>
-                          <option value="tiruvannamalai">Tiruvannamalai</option>
-                          <option value="tiruvallur">Tiruvallur</option>
-                          <option value="tiruppur">Tiruppur</option>
-                          <option value="coimbatore">Coimbatore</option>
-                          <option value="erode">Erode</option>
-                          <option value="salem">Salem</option>
-                          <option value="namakkal">Namakkal</option>
-                          <option value="tiruchirappalli">Tiruchirappalli</option>
-                          <option value="thanjavur">Thanjavur</option>
-                          <option value="pudukkottai">Pudukkottai</option>
-                          <option value="karur">Karur</option>
-                          <option value="ariyalur">Ariyalur</option>
-                          <option value="perambalur">Perambalur</option>
-                          <option value="madurai" selected>Madurai</option>
-                          <option value="virudhunagar">Virudhunagar</option>
-                          <option value="dindigul">Dindigul</option>
-                          <option value="ramanathapuram">Ramanathapuram</option>
-                          <option value="sivaganga">Sivaganga</option>
-                          <option value="thoothukkudi">Thoothukkudi</option>
-                          <option value="tirunelveli">Tirunelveli</option>
-                          <option value="tiruppur">Tiruppur</option>
-                          <option value="tenkasi">Tenkasi</option>
-                          <option value="kanniyakumari">Kanniyakumari</option>
-                        </select> 
+                        <select id="location" name="location" style="padding:10px;">
+  <option value="" selected disabled>Select One</option>
+  <option value="dhanmondi">Dhanmondi</option>
+  <option value="uttara">Uttara</option>
+  <option value="mirpur">Mirpur</option>
+  <option value="gulshan">Gulshan</option>
+  <option value="banani">Banani</option>
+</select>
+
                         
 
                         <!-- <input type="password" class="password" placeholder="Create a password" required> -->
